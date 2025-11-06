@@ -33,11 +33,41 @@ export function KeyboardDemo() {
   const emojis = ['😊', '😂', '❤️', '👍', '🎉', '🔥', '✨', '💯'];
 
   const toolbarIcons = [
-    { icon: Undo, label: 'Undo', color: 'from-purple-400 to-purple-600', onClick: () => {} },
-    { icon: Redo, label: 'Redo', color: 'from-pink-400 to-pink-600', onClick: () => {} },
-    { icon: Settings, label: 'Settings', color: 'from-amber-400 to-amber-600', onClick: () => {} },
-    { icon: Clipboard, label: 'Clipboard', color: 'from-teal-400 to-teal-600', onClick: () => setShowClipboard(true) },
-    { icon: MoreHorizontal, label: 'More', color: 'from-indigo-400 to-indigo-600', onClick: () => {} }
+    { 
+      icon: Undo, 
+      label: 'Undo', 
+      gradient: 'linear-gradient(135deg, #6750A4 0%, #7F67BE 100%)',
+      shadow: '#6750A4',
+      onClick: () => {} 
+    },
+    { 
+      icon: Redo, 
+      label: 'Redo', 
+      gradient: 'linear-gradient(135deg, #EC4899 0%, #F43F5E 100%)',
+      shadow: '#EC4899',
+      onClick: () => {} 
+    },
+    { 
+      icon: Settings, 
+      label: 'Settings', 
+      gradient: 'linear-gradient(135deg, #FBBF24 0%, #F97316 100%)',
+      shadow: '#FBBF24',
+      onClick: () => {} 
+    },
+    { 
+      icon: Clipboard, 
+      label: 'Clipboard', 
+      gradient: 'linear-gradient(135deg, #06B6D4 0%, #0891B2 100%)',
+      shadow: '#06B6D4',
+      onClick: () => setShowClipboard(true) 
+    },
+    { 
+      icon: MoreHorizontal, 
+      label: 'More', 
+      gradient: 'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)',
+      shadow: '#8B5CF6',
+      onClick: () => {} 
+    }
   ];
 
   const keyboardRows = [
@@ -115,8 +145,8 @@ export function KeyboardDemo() {
   const isTyping = inputText.length > 0 && suggestions.length > 0;
 
   return (
-    <div className="flex flex-col h-screen bg-[#FEF7FF] relative">
-      {/* Clipboard Overlay */}
+    <div className="flex flex-col h-screen relative" style={{ backgroundColor: '#FEF7FF' }}>
+      {/* Clipboard Overlay - Material You Bottom Sheet */}
       <AnimatePresence>
         {showClipboard && (
           <>
@@ -124,25 +154,52 @@ export function KeyboardDemo() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
               onClick={() => setShowClipboard(false)}
-              className="absolute inset-0 bg-black/40 z-40"
+              className="absolute inset-0 z-40"
+              style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)' }}
             />
             <motion.div
               initial={{ y: '100%' }}
               animate={{ y: 0 }}
               exit={{ y: '100%' }}
-              transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-              className="absolute inset-x-0 top-0 bottom-0 z-50 bg-white rounded-t-[32px] overflow-hidden"
-              style={{ height: '70%', marginTop: '30%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              className="absolute inset-x-0 top-0 bottom-0 z-50 overflow-hidden elevation-5"
+              style={{ 
+                height: '70%', 
+                marginTop: '30%',
+                backgroundColor: '#FFFFFF',
+                borderTopLeftRadius: '32px',
+                borderTopRightRadius: '32px'
+              }}
             >
               <div className="h-full flex flex-col">
-                <div className="flex items-center justify-between p-4 border-b border-[#E8DEF8]">
-                  <h3 className="text-[#1C1B1F]">Clipboard Manager</h3>
+                <div 
+                  className="flex items-center justify-between elevation-1"
+                  style={{ 
+                    padding: '16px 20px',
+                    borderBottom: '1px solid #E7E0EC'
+                  }}
+                >
+                  <h3 className="title-large" style={{ color: '#1C1B1F' }}>
+                    Clipboard Manager
+                  </h3>
                   <button
                     onClick={() => setShowClipboard(false)}
-                    className="w-8 h-8 rounded-full bg-[#E8DEF8] flex items-center justify-center hover:bg-[#D0BCFF] transition-colors"
+                    className="flex items-center justify-center touch-feedback"
+                    style={{
+                      width: '40px',
+                      height: '40px',
+                      borderRadius: '20px',
+                      backgroundColor: '#E8DEF8',
+                      border: 'none',
+                      cursor: 'pointer',
+                      transition: 'background-color 150ms'
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#D7C6ED'}
+                    onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#E8DEF8'}
                   >
-                    <ChevronDown className="w-5 h-5 text-[#1C1B1F]" strokeWidth={2.5} />
+                    <ChevronDown className="w-5 h-5" style={{ color: '#1C1B1F' }} strokeWidth={2.5} />
                   </button>
                 </div>
                 <div className="flex-1 overflow-hidden">
@@ -154,43 +211,85 @@ export function KeyboardDemo() {
         )}
       </AnimatePresence>
 
-      {/* Demo Input Area */}
-      <div className="flex-1 p-6 flex items-center justify-center">
-        <div className="w-full max-w-md bg-white rounded-[28px] p-6 shadow-lg">
-          <div className="text-[#79747E] mb-3">Type something...</div>
-          <div className="min-h-[60px] text-[#1C1B1F]">
+      {/* Demo Input Area - Material You surface */}
+      <div className="flex-1 flex items-center justify-center" style={{ padding: '24px' }}>
+        <div 
+          className="w-full max-w-md elevation-2"
+          style={{
+            backgroundColor: '#FFFFFF',
+            borderRadius: '28px',
+            padding: '24px'
+          }}
+        >
+          <div className="body-small mb-3" style={{ color: '#79747E' }}>
+            Type something...
+          </div>
+          <div className="title-large" style={{ minHeight: '60px', color: '#1C1B1F' }}>
             {inputText}
             <span className="animate-pulse">|</span>
           </div>
         </div>
       </div>
 
-      {/* Keyboard Container */}
-      <div className="bg-[#ECE6F0] rounded-t-[32px] pb-6 shadow-2xl">
+      {/* Keyboard Container - Material You surface with elevation */}
+      <div 
+        className="elevation-4" 
+        style={{
+          backgroundColor: '#ECE6F0',
+          borderTopLeftRadius: '32px',
+          borderTopRightRadius: '32px',
+          paddingBottom: '24px'
+        }}
+      >
         {/* Toolbar / Suggestions Bar */}
-        <div className="px-3 py-3 min-h-[56px] flex items-center gap-2">
-          {/* Arrow Button (Static) */}
+        <div 
+          style={{ 
+            padding: '12px',
+            minHeight: '56px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px'
+          }}
+        >
+          {/* Arrow Button - Material You filled tonal button */}
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={() => setShowToolbar(!showToolbar)}
-            className={`w-11 h-11 rounded-full flex items-center justify-center transition-all flex-shrink-0 ${
-              showToolbar ? 'bg-[#6750A4] shadow-md' : 'bg-[#E8DEF8] hover:bg-[#D0BCFF]'
-            }`}
+            className="flex items-center justify-center touch-feedback"
+            style={{
+              width: '44px',
+              height: '44px',
+              borderRadius: '22px',
+              backgroundColor: showToolbar ? '#6750A4' : '#E8DEF8',
+              border: 'none',
+              cursor: 'pointer',
+              flexShrink: 0,
+              boxShadow: showToolbar ? 'var(--elevation-2)' : 'none',
+              transition: 'all 150ms cubic-bezier(0.4, 0, 0.2, 1)'
+            }}
             aria-label="Toolbar"
           >
-            <motion.div
-              animate={{ rotate: showToolbar ? 0 : 0 }}
-              transition={{ duration: 0.2 }}
-            >
-              <ChevronLeft className={`w-5 h-5 ${showToolbar ? 'text-white' : 'text-[#1C1B1F]'}`} strokeWidth={2.5} />
-            </motion.div>
+            <ChevronLeft 
+              className="w-5 h-5" 
+              style={{ color: showToolbar ? '#FFFFFF' : '#1C1B1F' }} 
+              strokeWidth={2.5} 
+            />
           </motion.button>
 
           {/* Middle Section - Toolbar Icons or Suggestions */}
-          <div className="flex-1 min-w-0 flex items-center justify-start overflow-hidden">
+          <div 
+            style={{ 
+              flex: 1,
+              minWidth: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'start',
+              overflow: 'hidden'
+            }}
+          >
             <AnimatePresence mode="wait">
               {showToolbar && !isTyping ? (
-                /* Toolbar Icons - Slide in with scroll */
+                /* Toolbar Icons - Material You gradient icon buttons */
                 <motion.div
                   key="toolbar"
                   initial={{ x: -100, opacity: 0 }}
@@ -199,16 +298,46 @@ export function KeyboardDemo() {
                   transition={{ type: "spring", damping: 25, stiffness: 300 }}
                   className="w-full overflow-x-auto scrollbar-hide"
                 >
-                  <div className="flex gap-2 items-center justify-evenly w-full px-2">
+                  <div 
+                    style={{ 
+                      display: 'flex',
+                      gap: '8px',
+                      alignItems: 'center',
+                      justifyContent: 'space-evenly',
+                      width: '100%',
+                      padding: '0 8px'
+                    }}
+                  >
                     {toolbarIcons.map((item, index) => (
                       <motion.button
                         key={item.label}
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: index * 0.04, type: "spring", stiffness: 300 }}
+                        transition={{ 
+                          delay: index * 0.04, 
+                          type: "spring", 
+                          stiffness: 300 
+                        }}
                         whileTap={{ scale: 0.9 }}
                         onClick={item.onClick}
-                        className={`w-9 h-9 flex-shrink-0 bg-gradient-to-br ${item.color} rounded-full flex items-center justify-center shadow-md hover:shadow-lg transition-shadow`}
+                        className="flex items-center justify-center touch-feedback"
+                        style={{
+                          width: '40px',
+                          height: '40px',
+                          flexShrink: 0,
+                          background: item.gradient,
+                          borderRadius: '20px',
+                          border: 'none',
+                          cursor: 'pointer',
+                          boxShadow: `0 4px 8px ${item.shadow}40`,
+                          transition: 'box-shadow 150ms'
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.boxShadow = `0 6px 12px ${item.shadow}50`;
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.boxShadow = `0 4px 8px ${item.shadow}40`;
+                        }}
                         aria-label={item.label}
                       >
                         <item.icon className="w-4 h-4 text-white" strokeWidth={2.5} />
@@ -217,16 +346,21 @@ export function KeyboardDemo() {
                   </div>
                 </motion.div>
               ) : isTyping ? (
-                /* Suggestion Bar */
+                /* Suggestion Bar - Material You chips */
                 <motion.div
                   key="suggestions"
                   initial={{ y: 10, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
                   exit={{ y: -10, opacity: 0 }}
-                  transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-                  className="flex flex-col gap-2 w-full"
+                  transition={{ duration: 0.25, ease: [0.4, 0, 0.2, 1] }}
+                  style={{ 
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '8px',
+                    width: '100%'
+                  }}
                 >
-                  <div className="flex gap-2 w-full">
+                  <div style={{ display: 'flex', gap: '8px', width: '100%' }}>
                     {suggestions.map((suggestion, index) => (
                       <motion.button
                         key={index}
@@ -235,34 +369,54 @@ export function KeyboardDemo() {
                         transition={{ delay: index * 0.05 }}
                         whileTap={{ scale: 0.97 }}
                         onClick={() => handleSuggestionClick(suggestion)}
-                        className="flex-1 px-3 py-2.5 bg-white rounded-[16px] text-[#1C1B1F] hover:bg-[#F3EDF7] active:bg-[#E8DEF8] transition-colors shadow-sm min-w-0"
+                        className="label-large touch-feedback"
+                        style={{
+                          flex: 1,
+                          padding: '10px 12px',
+                          backgroundColor: '#FFFFFF',
+                          borderRadius: '16px',
+                          color: '#1C1B1F',
+                          border: 'none',
+                          cursor: 'pointer',
+                          boxShadow: 'var(--elevation-1)',
+                          minWidth: 0,
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap',
+                          transition: 'background-color 150ms'
+                        }}
+                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#F3EDF7'}
+                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#FFFFFF'}
                       >
-                        <span className="truncate block">{suggestion}</span>
+                        {suggestion}
                       </motion.button>
                     ))}
                   </div>
                   
                   {/* More Suggestions Button */}
-                  <div className="flex justify-center">
+                  <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <motion.button
                       whileTap={{ scale: 0.95 }}
-                      onMouseDown={() => {
-                        const timer = setTimeout(handleLongPress, 500);
-                        return () => clearTimeout(timer);
-                      }}
-                      onTouchStart={() => {
-                        const timer = setTimeout(handleLongPress, 500);
-                        return () => clearTimeout(timer);
-                      }}
                       onClick={() => setShowMoreSuggestions(!showMoreSuggestions)}
-                      className="w-8 h-8 bg-[#E8DEF8] rounded-full flex items-center justify-center hover:bg-[#D0BCFF] transition-colors"
+                      className="flex items-center justify-center touch-feedback"
+                      style={{
+                        width: '32px',
+                        height: '32px',
+                        backgroundColor: '#E8DEF8',
+                        borderRadius: '16px',
+                        border: 'none',
+                        cursor: 'pointer',
+                        transition: 'background-color 150ms'
+                      }}
+                      onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#D7C6ED'}
+                      onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#E8DEF8'}
                       aria-label="More suggestions"
                     >
                       <motion.div
                         animate={{ rotate: showMoreSuggestions ? 180 : 0 }}
                         transition={{ duration: 0.2 }}
                       >
-                        <ChevronDown className="w-4 h-4 text-[#1C1B1F]" strokeWidth={2.5} />
+                        <ChevronDown className="w-4 h-4" style={{ color: '#1C1B1F' }} strokeWidth={2.5} />
                       </motion.div>
                     </motion.button>
                   </div>
@@ -275,9 +429,9 @@ export function KeyboardDemo() {
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="overflow-hidden"
+                        style={{ overflow: 'hidden' }}
                       >
-                        <div className="flex flex-wrap gap-2">
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                           {allSuggestions.slice(3).map((suggestion, index) => (
                             <motion.button
                               key={index}
@@ -286,7 +440,19 @@ export function KeyboardDemo() {
                               transition={{ delay: index * 0.03 }}
                               whileTap={{ scale: 0.95 }}
                               onClick={() => handleSuggestionClick(suggestion)}
-                              className="px-3 py-2 bg-white rounded-[12px] text-[#1C1B1F] hover:bg-[#F3EDF7] active:bg-[#E8DEF8] transition-colors shadow-sm text-sm"
+                              className="body-medium touch-feedback"
+                              style={{
+                                padding: '8px 12px',
+                                backgroundColor: '#FFFFFF',
+                                borderRadius: '12px',
+                                color: '#1C1B1F',
+                                border: 'none',
+                                cursor: 'pointer',
+                                boxShadow: 'var(--elevation-1)',
+                                transition: 'background-color 150ms'
+                              }}
+                              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#F3EDF7'}
+                              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#FFFFFF'}
                             >
                               {suggestion}
                             </motion.button>
@@ -297,32 +463,44 @@ export function KeyboardDemo() {
                   </AnimatePresence>
                 </motion.div>
               ) : (
-                /* Empty space when idle */
                 <motion.div
                   key="empty"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="w-full"
+                  style={{ width: '100%' }}
                 />
               )}
             </AnimatePresence>
           </div>
 
-          {/* Mic Button (Static with Active State) */}
+          {/* Mic Button - Material You FAB style */}
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsRecording(!isRecording)}
-            className={`w-11 h-11 rounded-full flex items-center justify-center shadow-md transition-all flex-shrink-0 relative ${
-              isRecording 
-                ? 'bg-gradient-to-br from-red-500 to-rose-600 shadow-lg shadow-red-500/30' 
-                : 'bg-gradient-to-br from-red-400 to-rose-500 hover:shadow-lg'
-            }`}
+            className="flex items-center justify-center touch-feedback"
+            style={{
+              width: '44px',
+              height: '44px',
+              borderRadius: '22px',
+              background: isRecording 
+                ? 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)'
+                : 'linear-gradient(135deg, #F87171 0%, #EF4444 100%)',
+              border: 'none',
+              cursor: 'pointer',
+              flexShrink: 0,
+              position: 'relative',
+              boxShadow: isRecording 
+                ? '0 6px 12px rgba(239, 68, 68, 0.4)'
+                : '0 4px 8px rgba(239, 68, 68, 0.3)',
+              transition: 'box-shadow 150ms'
+            }}
             aria-label="Voice input"
           >
             {isRecording && (
               <motion.div
-                className="absolute inset-0 rounded-full bg-red-400"
+                className="absolute inset-0 rounded-full"
+                style={{ backgroundColor: '#EF4444' }}
                 animate={{ 
                   scale: [1, 1.2, 1],
                   opacity: [0.5, 0, 0.5]
@@ -334,46 +512,117 @@ export function KeyboardDemo() {
                 }}
               />
             )}
-            <Mic className={`w-5 h-5 text-white relative z-10 ${isRecording ? 'scale-110' : ''}`} strokeWidth={2.5} />
+            <Mic 
+              className="w-5 h-5 text-white relative z-10" 
+              style={{ transform: isRecording ? 'scale(1.1)' : 'scale(1)' }}
+              strokeWidth={2.5} 
+            />
           </motion.button>
         </div>
 
-        {/* Keyboard */}
-        <div className="px-2 mt-2">
+        {/* Keyboard Keys - Material You style */}
+        <div style={{ padding: '0 8px', marginTop: '8px' }}>
           {/* Row 1 */}
-          <div className="flex gap-1.5 mb-2.5">
+          <div style={{ display: 'flex', gap: '6px', marginBottom: '10px' }}>
             {keyboardRows[0].map((item) => (
               <button
                 key={item.key}
                 onClick={() => handleKeyPress(item.key)}
-                className="flex-1 h-12 bg-white rounded-xl shadow-sm active:shadow-none active:bg-[#E8DEF8] transition-all flex flex-col items-center justify-center relative"
+                className="touch-feedback"
+                style={{
+                  flex: 1,
+                  height: '48px',
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: '12px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  boxShadow: 'var(--elevation-1)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  position: 'relative',
+                  transition: 'all 150ms'
+                }}
               >
-                <span className="text-[10px] text-[#79747E] absolute top-1.5 left-1.5">{item.number}</span>
-                <span className="text-[18px] text-[#1C1B1F]">{item.key.toUpperCase()}</span>
+                <span 
+                  className="label-small"
+                  style={{ 
+                    color: '#79747E',
+                    position: 'absolute',
+                    top: '6px',
+                    left: '6px'
+                  }}
+                >
+                  {item.number}
+                </span>
+                <span className="title-medium" style={{ color: '#1C1B1F' }}>
+                  {item.key.toUpperCase()}
+                </span>
               </button>
             ))}
           </div>
 
           {/* Row 2 */}
-          <div className="flex gap-1.5 mb-2.5 px-4">
+          <div style={{ display: 'flex', gap: '6px', marginBottom: '10px', padding: '0 16px' }}>
             {keyboardRows[1].map((item) => (
               <button
                 key={item.key}
                 onClick={() => handleKeyPress(item.key)}
-                className="flex-1 h-12 bg-white rounded-xl shadow-sm active:shadow-none active:bg-[#E8DEF8] transition-all flex flex-col items-center justify-center relative"
+                className="touch-feedback"
+                style={{
+                  flex: 1,
+                  height: '48px',
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: '12px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  boxShadow: 'var(--elevation-1)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  position: 'relative',
+                  transition: 'all 150ms'
+                }}
               >
-                <span className="text-[10px] text-[#79747E] absolute top-1.5 left-1.5">{item.symbol}</span>
-                <span className="text-[18px] text-[#1C1B1F]">{item.key.toUpperCase()}</span>
+                <span 
+                  className="label-small"
+                  style={{ 
+                    color: '#79747E',
+                    position: 'absolute',
+                    top: '6px',
+                    left: '6px'
+                  }}
+                >
+                  {item.symbol}
+                </span>
+                <span className="title-medium" style={{ color: '#1C1B1F' }}>
+                  {item.key.toUpperCase()}
+                </span>
               </button>
             ))}
           </div>
 
           {/* Row 3 */}
-          <div className="flex gap-1.5 mb-2.5">
+          <div style={{ display: 'flex', gap: '6px', marginBottom: '10px' }}>
             <button
-              className="w-12 h-12 bg-[#D0BCFF] rounded-xl shadow-sm active:shadow-none active:bg-[#B9A3E8] transition-all flex items-center justify-center"
+              className="touch-feedback"
+              style={{
+                width: '48px',
+                height: '48px',
+                backgroundColor: '#D0BCFF',
+                borderRadius: '12px',
+                border: 'none',
+                cursor: 'pointer',
+                boxShadow: 'var(--elevation-1)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 150ms'
+              }}
             >
-              <svg className="w-5 h-5 text-[#1C1B1F]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <svg className="w-5 h-5" style={{ color: '#1C1B1F' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
               </svg>
             </button>
@@ -381,36 +630,106 @@ export function KeyboardDemo() {
               <button
                 key={item.key}
                 onClick={() => handleKeyPress(item.key)}
-                className="flex-1 h-12 bg-white rounded-xl shadow-sm active:shadow-none active:bg-[#E8DEF8] transition-all flex flex-col items-center justify-center relative"
+                className="touch-feedback"
+                style={{
+                  flex: 1,
+                  height: '48px',
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: '12px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  boxShadow: 'var(--elevation-1)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  position: 'relative',
+                  transition: 'all 150ms'
+                }}
               >
-                <span className="text-[10px] text-[#79747E] absolute top-1.5 left-1.5">{item.symbol}</span>
-                <span className="text-[18px] text-[#1C1B1F]">{item.key.toUpperCase()}</span>
+                <span 
+                  className="label-small"
+                  style={{ 
+                    color: '#79747E',
+                    position: 'absolute',
+                    top: '6px',
+                    left: '6px'
+                  }}
+                >
+                  {item.symbol}
+                </span>
+                <span className="title-medium" style={{ color: '#1C1B1F' }}>
+                  {item.key.toUpperCase()}
+                </span>
               </button>
             ))}
             <button
               onClick={handleBackspace}
-              className="w-12 h-12 bg-white rounded-xl shadow-sm active:shadow-none active:bg-[#E8DEF8] transition-all flex items-center justify-center"
+              className="touch-feedback"
+              style={{
+                width: '48px',
+                height: '48px',
+                backgroundColor: '#FFFFFF',
+                borderRadius: '12px',
+                border: 'none',
+                cursor: 'pointer',
+                boxShadow: 'var(--elevation-1)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 150ms'
+              }}
             >
-              <svg className="w-6 h-6 text-[#1C1B1F]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <svg className="w-6 h-6" style={{ color: '#1C1B1F' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414 6.414a2 2 0 001.414.586H19a2 2 0 002-2V7a2 2 0 00-2-2h-8.172a2 2 0 00-1.414.586L3 12z" />
               </svg>
             </button>
           </div>
 
           {/* Row 4 - Bottom Row */}
-          <div className="flex gap-1.5 mb-3">
-            <button className="px-4 h-12 bg-[#D0BCFF] rounded-xl shadow-sm active:shadow-none active:bg-[#B9A3E8] transition-all flex items-center justify-center">
-              <span className="text-[#1C1B1F]">?123</span>
+          <div style={{ display: 'flex', gap: '6px', marginBottom: '12px' }}>
+            <button 
+              className="label-medium touch-feedback"
+              style={{
+                padding: '0 16px',
+                height: '48px',
+                backgroundColor: '#D0BCFF',
+                borderRadius: '12px',
+                border: 'none',
+                cursor: 'pointer',
+                boxShadow: 'var(--elevation-1)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#1C1B1F',
+                transition: 'all 150ms'
+              }}
+            >
+              ?123
             </button>
             
             {/* Combined Comma & Emoji Button */}
-            <div className="relative">
+            <div style={{ position: 'relative' }}>
               <button 
                 onClick={() => setShowEmojiPicker(!showEmojiPicker)}
-                className="w-12 h-12 bg-white rounded-xl shadow-sm active:shadow-none active:bg-[#E8DEF8] transition-all flex flex-col items-center justify-center"
+                className="touch-feedback"
+                style={{
+                  width: '48px',
+                  height: '48px',
+                  backgroundColor: '#FFFFFF',
+                  borderRadius: '12px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  boxShadow: 'var(--elevation-1)',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all 150ms'
+                }}
               >
-                <span className="text-[10px] text-[#79747E]">,</span>
-                <span className="text-[16px]">😊</span>
+                <span className="label-small" style={{ color: '#79747E' }}>,</span>
+                <span style={{ fontSize: '16px' }}>😊</span>
               </button>
               
               {/* Emoji Picker Popup */}
@@ -421,7 +740,20 @@ export function KeyboardDemo() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute bottom-full mb-2 left-0 bg-white rounded-[20px] shadow-xl p-3 grid grid-cols-4 gap-2 z-50"
+                    className="elevation-3"
+                    style={{
+                      position: 'absolute',
+                      bottom: '100%',
+                      marginBottom: '8px',
+                      left: 0,
+                      backgroundColor: '#FFFFFF',
+                      borderRadius: '20px',
+                      padding: '12px',
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(4, 1fr)',
+                      gap: '8px',
+                      zIndex: 50
+                    }}
                   >
                     {emojis.map((emoji, index) => (
                       <motion.button
@@ -434,9 +766,23 @@ export function KeyboardDemo() {
                           handleKeyPress(emoji);
                           setShowEmojiPicker(false);
                         }}
-                        className="w-10 h-10 flex items-center justify-center hover:bg-[#F3EDF7] rounded-lg transition-colors"
+                        className="touch-feedback"
+                        style={{
+                          width: '40px',
+                          height: '40px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          backgroundColor: 'transparent',
+                          border: 'none',
+                          borderRadius: '8px',
+                          cursor: 'pointer',
+                          transition: 'background-color 150ms'
+                        }}
+                        onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#F3EDF7'}
+                        onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
                       >
-                        <span className="text-[20px]">{emoji}</span>
+                        <span style={{ fontSize: '20px' }}>{emoji}</span>
                       </motion.button>
                     ))}
                   </motion.div>
@@ -445,23 +791,87 @@ export function KeyboardDemo() {
             </div>
 
             {/* Globe Icon - Language Switcher */}
-            <button className="w-12 h-12 bg-white rounded-xl shadow-sm active:shadow-none active:bg-[#E8DEF8] transition-all flex items-center justify-center">
-              <Globe className="w-5 h-5 text-[#1C1B1F]" strokeWidth={2} />
+            <button 
+              className="touch-feedback"
+              style={{
+                width: '48px',
+                height: '48px',
+                backgroundColor: '#FFFFFF',
+                borderRadius: '12px',
+                border: 'none',
+                cursor: 'pointer',
+                boxShadow: 'var(--elevation-1)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'all 150ms'
+              }}
+            >
+              <Globe className="w-5 h-5" style={{ color: '#1C1B1F' }} strokeWidth={2} />
             </button>
 
             <button 
               onClick={() => handleKeyPress(' ')}
-              className="flex-1 h-12 bg-white rounded-xl shadow-sm active:shadow-none active:bg-[#E8DEF8] transition-all flex items-center justify-center"
+              className="body-medium touch-feedback"
+              style={{
+                flex: 1,
+                height: '48px',
+                backgroundColor: '#FFFFFF',
+                borderRadius: '12px',
+                border: 'none',
+                cursor: 'pointer',
+                boxShadow: 'var(--elevation-1)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#49454F',
+                transition: 'all 150ms'
+              }}
             >
-              <span className="text-sm text-[#49454F]">English (US)</span>
+              English (US)
             </button>
             <button 
               onClick={() => handleKeyPress('.')}
-              className="w-12 h-12 bg-white rounded-xl shadow-sm active:shadow-none active:bg-[#E8DEF8] transition-all flex items-center justify-center"
+              className="title-medium touch-feedback"
+              style={{
+                width: '48px',
+                height: '48px',
+                backgroundColor: '#FFFFFF',
+                borderRadius: '12px',
+                border: 'none',
+                cursor: 'pointer',
+                boxShadow: 'var(--elevation-1)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#1C1B1F',
+                transition: 'all 150ms'
+              }}
             >
-              <span className="text-[18px] text-[#1C1B1F]">.</span>
+              .
             </button>
-            <button className="px-4 h-12 bg-gradient-to-br from-green-400 to-emerald-500 rounded-xl shadow-md active:shadow-sm transition-all flex items-center justify-center">
+            <button 
+              className="touch-feedback"
+              style={{
+                padding: '0 16px',
+                height: '48px',
+                background: 'linear-gradient(135deg, #4ADE80 0%, #10B981 100%)',
+                borderRadius: '12px',
+                border: 'none',
+                cursor: 'pointer',
+                boxShadow: '0 4px 8px rgba(74, 222, 128, 0.3)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'box-shadow 150ms'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = '0 6px 12px rgba(74, 222, 128, 0.4)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = '0 4px 8px rgba(74, 222, 128, 0.3)';
+              }}
+            >
               <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
@@ -469,24 +879,71 @@ export function KeyboardDemo() {
           </div>
 
           {/* Bottom Controls */}
-          <div className="flex justify-center items-center gap-4 px-4">
-            <button className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-[#E8DEF8]/50 transition-colors">
-              <svg className="w-5 h-5 text-[#49454F]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <div 
+            style={{ 
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '16px',
+              padding: '0 16px'
+            }}
+          >
+            <button 
+              className="touch-feedback"
+              style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: '20px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'background-color 150ms'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(232, 222, 248, 0.5)'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+            >
+              <svg className="w-5 h-5" style={{ color: '#49454F' }} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
-            <div className="flex-1" />
-            <button className="w-10 h-10 rounded-full flex items-center justify-center hover:bg-[#E8DEF8]/50 transition-colors">
-              <svg className="w-5 h-5 text-[#49454F]" viewBox="0 0 24 24" fill="currentColor">
+            <div style={{ flex: 1 }} />
+            <button 
+              className="touch-feedback"
+              style={{
+                width: '40px',
+                height: '40px',
+                borderRadius: '20px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                transition: 'background-color 150ms'
+              }}
+              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'rgba(232, 222, 248, 0.5)'}
+              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+            >
+              <svg className="w-5 h-5" style={{ color: '#49454F' }} viewBox="0 0 24 24" fill="currentColor">
                 <path d="M4 4h4v4H4V4zm6 0h4v4h-4V4zm6 0h4v4h-4V4zM4 10h4v4H4v-4zm6 0h4v4h-4v-4zm6 0h4v4h-4v-4zM4 16h4v4H4v-4zm6 0h4v4h-4v-4zm6 0h4v4h-4v-4z" />
               </svg>
             </button>
           </div>
         </div>
 
-        {/* Home Indicator */}
-        <div className="flex justify-center mt-4">
-          <div className="w-32 h-1 bg-[#1C1B1F]/30 rounded-full" />
+        {/* Home Indicator - Material You gesture indicator */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '16px' }}>
+          <div 
+            style={{ 
+              width: '128px',
+              height: '4px',
+              backgroundColor: 'rgba(28, 27, 31, 0.3)',
+              borderRadius: '2px'
+            }}
+          />
         </div>
       </div>
     </div>
