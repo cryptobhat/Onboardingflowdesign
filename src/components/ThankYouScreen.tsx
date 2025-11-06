@@ -4,9 +4,10 @@ import { CheckCircle2, Heart, Settings } from 'lucide-react';
 interface ThankYouScreenProps {
   onDonate: () => void;
   onSettings: () => void;
+  onKeyboardDemo?: () => void;
 }
 
-export function ThankYouScreen({ onDonate, onSettings }: ThankYouScreenProps) {
+export function ThankYouScreen({ onDonate, onSettings, onKeyboardDemo }: ThankYouScreenProps) {
   return (
     <div className="min-h-screen flex items-center justify-center p-5 sm:p-6 relative overflow-hidden">
       {/* Background Decoration */}
@@ -107,6 +108,16 @@ export function ThankYouScreen({ onDonate, onSettings }: ThankYouScreenProps) {
               <Settings className="w-5 h-5" />
               <span>Explore Settings</span>
             </motion.button>
+
+            {onKeyboardDemo && (
+              <motion.button
+                whileTap={{ scale: 0.97 }}
+                onClick={onKeyboardDemo}
+                className="w-full h-12 text-[#6750A4] rounded-full hover:bg-[#E8DEF8]/30 transition-all duration-300"
+              >
+                <span className="text-sm">Skip to Keyboard Demo</span>
+              </motion.button>
+            )}
           </motion.div>
         </motion.div>
       </div>

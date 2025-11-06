@@ -25,7 +25,11 @@ import { LayoutSettings } from './settings/LayoutSettings';
 
 type SettingsPage = 'main' | 'keyboard-height' | 'typing' | 'layouts' | 'themes' | 'languages' | 'privacy' | 'about';
 
-export function SettingsScreen() {
+interface SettingsScreenProps {
+  onKeyboardDemo?: () => void;
+}
+
+export function SettingsScreen({ onKeyboardDemo }: SettingsScreenProps = {}) {
   const [currentPage, setCurrentPage] = useState<SettingsPage>('main');
   const [settings, setSettings] = useState({
     keyBorders: true,
@@ -251,6 +255,24 @@ export function SettingsScreen() {
             </div>
           </motion.div>
         ))}
+
+        {/* Keyboard Demo Button */}
+        {onKeyboardDemo && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5, duration: 0.5 }}
+          >
+            <motion.button
+              whileTap={{ scale: 0.97 }}
+              onClick={onKeyboardDemo}
+              className="w-full h-14 bg-gradient-to-r from-[#6750A4] to-[#7F67BE] text-white rounded-[28px] shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              <Keyboard className="w-5 h-5" />
+              <span>Try Keyboard Demo</span>
+            </motion.button>
+          </motion.div>
+        )}
 
         {/* Footer */}
         <motion.div

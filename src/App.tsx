@@ -6,8 +6,9 @@ import { DonationScreen } from './components/DonationScreen';
 import { DonationThankYou } from './components/DonationThankYou';
 import { DonationExplanation } from './components/DonationExplanation';
 import { SettingsScreen } from './components/SettingsScreen';
+import { KeyboardDemo } from './components/KeyboardDemo';
 
-type Screen = 'welcome' | 'keyboard-selection' | 'thank-you' | 'donation' | 'donation-thank-you' | 'donation-explanation' | 'settings';
+type Screen = 'welcome' | 'keyboard-selection' | 'thank-you' | 'donation' | 'donation-thank-you' | 'donation-explanation' | 'settings' | 'keyboard-demo';
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('welcome');
@@ -24,6 +25,7 @@ export default function App() {
         <ThankYouScreen 
           onDonate={() => setCurrentScreen('donation')}
           onSettings={() => setCurrentScreen('settings')}
+          onKeyboardDemo={() => setCurrentScreen('keyboard-demo')}
         />
       )}
       {currentScreen === 'donation' && (
@@ -42,7 +44,10 @@ export default function App() {
         />
       )}
       {currentScreen === 'settings' && (
-        <SettingsScreen />
+        <SettingsScreen onKeyboardDemo={() => setCurrentScreen('keyboard-demo')} />
+      )}
+      {currentScreen === 'keyboard-demo' && (
+        <KeyboardDemo />
       )}
     </div>
   );
