@@ -26,843 +26,868 @@ These guidelines ensure consistency across the Kavi Kannada app development (bot
 
 ---
 
-## Design System Rules
+## Material You 2025 Design System
 
-### Color Usage
-- **Primary Action**: Always use gradient purple (`#6750A4` to `#7F67BE`)
-- **Backgrounds**: Main app background must be `#FEF7FF`
-- **Surface Colors**: Cards and panels use `#FFFFFF` or `#F3EDF7`
-- **Text Colors**:
-  - Primary text: `#1C1B1F`
-  - Secondary text: `#49454F`
-  - Tertiary/hints: `#79747E`
+### Core Design Principles
 
-### Typography Rules
-- **Never** override font sizes, weights, or line heights unless explicitly needed
-- Use semantic HTML elements (`h1`, `h2`, `p`) to leverage default typography from `globals.css`
-- Minimum text size: 12px (for labels only), 14px for body text
-- Button text: Always medium weight (500)
+Kavi Kannada follows **Material Design 3 (Material You 2025)** specifications. The design emphasizes:
 
-### Spacing Consistency
-- Use the 4px grid system: 4, 8, 12, 16, 20, 24, 32
-- Screen padding: **Always 20px (1.25rem)**
-- Card padding: **16px minimum, 20px standard**
-- Gap between sections: **24px**
-- Gap between list items: **12px**
+1. **Organic Shapes** - Rounded corners (20-32px) for warmth and approachability
+2. **Elevation Hierarchy** - Subtle shadows create depth without harshness
+3. **Dynamic Color** - Purple-based palette with gradient accents
+4. **Expressive Motion** - Spring animations for natural, playful interactions
+5. **Accessible First** - 4.5:1 contrast minimum, 48px touch targets
 
-### Border Radius Standards
-- Small elements (chips, badges): `12px`
-- Standard cards: `20px`
-- Large containers (modals, sheets): `28px`
-- Keyboard keys: `12px`
-- Icon buttons: Full circle (`9999px`)
-- **Never use sharp corners** - minimum 8px radius
+### Color System
 
-### Shadows & Elevation
-- Subtle shadows only: max `shadow-lg` in Tailwind
-- Use tinted shadows for colored elements (e.g., `shadow-purple-500/25`)
-- Elevation layers:
-  - Cards at rest: subtle shadow
-  - Floating buttons: medium shadow
-  - Modals/dialogs: strong shadow
+#### Primary Colors
+```
+Primary: #6750A4
+Primary Container: #E8DEF8
+On Primary: #FFFFFF
+On Primary Container: #21005D
 
-### Gradient Styles
+Secondary: #625B71
+Secondary Container: #E8DEF8
+On Secondary: #FFFFFF
+On Secondary Container: #1D192B
 
-Kavi Kannada uses a carefully curated set of gradients to create depth, visual interest, and brand consistency. **Always use these exact gradient definitions** to ensure consistency across all platforms.
-
-#### 1. Primary Purple Gradient (Main CTA)
-**Usage**: Primary buttons, important CTAs, floating action buttons, success icons
-
-**Tailwind (React)**:
-```tsx
-className="bg-gradient-to-r from-purple-600 to-purple-500"
-// OR for diagonal (more dynamic)
-className="bg-gradient-to-br from-purple-600 to-purple-500"
+Tertiary: #7D5260
+Tertiary Container: #FFD8E4
+On Tertiary: #FFFFFF
+On Tertiary Container: #31111D
 ```
 
-**Exact Colors**:
-- Start: `#9333EA` (purple-600)
-- End: `#A855F7` (purple-500)
+#### Surface Colors
+```
+Surface: #FFFFFF
+Surface Variant: #E7E0EC
+Surface Tint: #6750A4
+Background: #FEF7FF  ← Main app background (purple tint)
+On Surface: #1C1B1F
+On Surface Variant: #49454F
+```
+
+#### Outline Colors
+```
+Outline: #79747E
+Outline Variant: #CAC4D0
+```
+
+#### Semantic Colors
+```
+Error: #EF4444
+Success: #4ADE80
+Warning: #FBBF24
+
+Web Link: #60A5FA (Background: #EFF6FF)
+Phone: #4ADE80 (Background: #F0FDF4)
+Email: #A78BFA (Background: #FAF5FF)
+Text: #FBBF24 (Background: #FFFBEB)
+```
+
+### Typography System
+
+**IMPORTANT**: Always use CSS classes from `globals.css` instead of Tailwind text utilities.
+
+#### Display Styles
+```css
+.display-large
+  font-size: 57px
+  line-height: 64px
+  font-weight: 400
+```
+
+#### Headline Styles
+```css
+.headline-large
+  font-size: 32px
+  line-height: 40px
+  font-weight: 400
+
+.headline-medium
+  font-size: 28px
+  line-height: 36px
+  font-weight: 400
+
+.headline-small
+  font-size: 24px
+  line-height: 32px
+  font-weight: 400
+```
+
+#### Title Styles
+```css
+.title-large
+  font-size: 22px
+  line-height: 28px
+  font-weight: 400
+
+.title-medium
+  font-size: 16px
+  line-height: 24px
+  font-weight: 500
+  letter-spacing: 0.15px
+
+.title-small
+  font-size: 14px
+  line-height: 20px
+  font-weight: 500
+  letter-spacing: 0.1px
+```
+
+#### Body Styles
+```css
+.body-large
+  font-size: 16px
+  line-height: 24px
+  font-weight: 400
+  letter-spacing: 0.5px
+
+.body-medium
+  font-size: 14px
+  line-height: 20px
+  font-weight: 400
+  letter-spacing: 0.25px
+
+.body-small
+  font-size: 12px
+  line-height: 16px
+  font-weight: 400
+  letter-spacing: 0.4px
+```
+
+#### Label Styles
+```css
+.label-large
+  font-size: 14px
+  line-height: 20px
+  font-weight: 500
+  letter-spacing: 0.1px
+
+.label-medium
+  font-size: 12px
+  line-height: 16px
+  font-weight: 500
+  letter-spacing: 0.5px
+
+.label-small
+  font-size: 11px
+  line-height: 16px
+  font-weight: 500
+  letter-spacing: 0.5px
+```
+
+#### Usage Guide
+```
+Page titles: .headline-large or .headline-medium
+Section headers: .title-large
+Card titles: .title-medium
+Body text: .body-large or .body-medium
+Captions/timestamps: .body-small
+Button text: .label-large
+Badges/chips: .label-small
+```
+
+### Spacing System (4dp Grid)
+
+```
+xs: 4px
+sm: 8px
+md: 12px
+lg: 16px
+xl: 20px    ← Default screen padding
+xxl: 24px   ← Section spacing
+xxxl: 32px  ← Large spacing
+```
+
+**Common Usage:**
+- Screen padding: **20px** (always)
+- Card padding: **16-24px**
+- Section gaps: **24px**
+- List item gaps: **12px**
+- Button horizontal padding: **24px**
+- Button vertical padding: **12px**
+
+### Border Radius (Organic Shapes)
+
+```
+xs: 8px      Small elements
+sm: 12px     Chips, badges, keyboard keys
+md: 16px     Input fields
+lg: 20px     Cards, list containers
+xl: 24px     Modal dialogs
+xxl: 28px    Primary buttons, large cards
+xxxl: 32px   Bottom sheets (top corners)
+full: 9999px Circular/pill shapes
+```
+
+**Component-Specific:**
+- Primary buttons: **28px**
+- Cards: **20px**
+- Bottom sheets: **32px** (top corners only)
+- Keyboard keys: **12px**
+- Icon containers: **16px** (for 48px containers)
+- Input fields: **16px**
+- Chips: **12px** or **full** (pill style)
+
+### Elevation & Shadows
+
+Material You uses subtle shadows with slight tint:
+
+```css
+.elevation-1
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.08)
+
+.elevation-2
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08)
+
+.elevation-3
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12)
+
+.elevation-4
+  box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.12)
+
+.elevation-5
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.16)
+```
+
+**Usage:**
+- Cards at rest: `.elevation-1`
+- Keyboard surface: `.elevation-2`
+- Floating elements (FAB): `.elevation-3`
+- Dialogs, modals: `.elevation-4`
+- Bottom sheets: `.elevation-5`
+
+**Colored Shadows for Gradients:**
+```tsx
+// Primary purple gradient button
+boxShadow: '0 8px 16px rgba(103, 80, 164, 0.25)'
+
+// Success green gradient
+boxShadow: '0 6px 12px rgba(74, 222, 128, 0.3)'
+
+// Pink gradient
+boxShadow: '0 8px 16px rgba(236, 72, 153, 0.25)'
+```
+
+---
+
+## Gradient System (Material You 2025)
+
+Kavi Kannada uses **diagonal gradients (135deg)** as the primary gradient direction for a modern, dynamic feel.
+
+### 1. Primary Purple Gradient (Brand Identity)
+
+**Usage**: Main CTAs, primary buttons, logo containers, brand elements
+
+**CSS/Tailwind**:
+```tsx
+style={{ background: 'linear-gradient(135deg, #6750A4 0%, #7F67BE 100%)' }}
+```
 
 **With Shadow**:
 ```tsx
-className="bg-gradient-to-r from-purple-600 to-purple-500 shadow-lg shadow-purple-500/25"
+style={{
+  background: 'linear-gradient(135deg, #6750A4 0%, #7F67BE 100%)',
+  boxShadow: '0 8px 16px rgba(103, 80, 164, 0.25)'
+}}
 ```
 
 **Kotlin/Compose**:
 ```kotlin
-modifier = Modifier.background(
+Modifier.background(
     brush = Brush.linearGradient(
         colors = listOf(
-            Color(0xFF9333EA), // purple-600
-            Color(0xFFA855F7)  // purple-500
+            Color(0xFF6750A4),
+            Color(0xFF7F67BE)
         )
     )
 )
-
-// With shadow effect
-modifier = Modifier
-    .background(
-        brush = Brush.linearGradient(
-            colors = listOf(Color(0xFF9333EA), Color(0xFFA855F7))
-        ),
-        shape = RoundedCornerShape(28.dp)
-    )
-    .shadow(
-        elevation = 8.dp,
-        shape = RoundedCornerShape(28.dp),
-        ambientColor = Color(0x40A855F7) // 25% opacity purple
-    )
 ```
 
-#### 2. Deep Purple Gradient (Brand Emphasis)
-**Usage**: Icon containers, toolbar icons, premium features, branding elements
+### 2. Pink-Rose Gradient (Donation/Love)
 
-**Tailwind (React)**:
+**Usage**: Donation buttons, favorite/heart actions, special CTAs
+
+**CSS/Tailwind**:
 ```tsx
-className="bg-gradient-to-br from-[#6750A4] to-[#7F67BE]"
+style={{ background: 'linear-gradient(135deg, #EC4899 0%, #F43F5E 100%)' }}
 ```
 
-**Exact Colors**:
-- Start: `#6750A4` (brand primary)
-- End: `#7F67BE` (brand primary light)
-
-**Icon Container Example**:
+**With Shadow**:
 ```tsx
-<div className="w-10 h-10 bg-gradient-to-br from-[#6750A4] to-[#7F67BE] rounded-full flex items-center justify-center shadow-md shadow-purple-500/30">
-  <Heart className="w-5 h-5 text-white" />
-</div>
+style={{
+  background: 'linear-gradient(135deg, #EC4899 0%, #F43F5E 100%)',
+  boxShadow: '0 8px 16px rgba(236, 72, 153, 0.25)'
+}}
 ```
 
 **Kotlin/Compose**:
 ```kotlin
-Box(
-    modifier = Modifier
-        .size(40.dp)
-        .background(
-            brush = Brush.linearGradient(
-                colors = listOf(
-                    Color(0xFF6750A4),
-                    Color(0xFF7F67BE)
-                )
-            ),
-            shape = CircleShape
+Modifier.background(
+    brush = Brush.linearGradient(
+        colors = listOf(
+            Color(0xFFEC4899),
+            Color(0xFFF43F5E)
         )
-        .shadow(4.dp, CircleShape),
-    contentAlignment = Alignment.Center
-) {
-    Icon(
-        imageVector = Icons.Filled.Favorite,
-        contentDescription = "Favorite",
-        tint = Color.White,
-        modifier = Modifier.size(20.dp)
-    )
-}
-```
-
-#### 3. Pink-Purple Gradient (Feature Cards)
-**Usage**: Feature cards, highlights, donation cards, special sections
-
-**Tailwind (React)**:
-```tsx
-className="bg-gradient-to-br from-[#FFE8F7] to-[#F3EDF7]"
-```
-
-**Exact Colors**:
-- Start: `#FFE8F7` (light pink)
-- End: `#F3EDF7` (light purple/lavender)
-
-**Feature Card Example**:
-```tsx
-<div className="bg-gradient-to-br from-[#FFE8F7] to-[#F3EDF7] rounded-[28px] p-6 shadow-sm">
-  <h3>Support Kavi Kannada</h3>
-  <p>Help us keep the keyboard free and awesome!</p>
-</div>
-```
-
-**Kotlin/Compose**:
-```kotlin
-Card(
-    modifier = Modifier
-        .fillMaxWidth()
-        .background(
-            brush = Brush.linearGradient(
-                colors = listOf(
-                    Color(0xFFFFE8F7),
-                    Color(0xFFF3EDF7)
-                )
-            ),
-            shape = RoundedCornerShape(28.dp)
-        )
-        .padding(24.dp),
-    shape = RoundedCornerShape(28.dp),
-    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
-) {
-    Column {
-        Text("Support Kavi Kannada")
-        Text("Help us keep the keyboard free and awesome!")
-    }
-}
-```
-
-#### 4. Success Green Gradient (Optional)
-**Usage**: Success states, confirmation screens, achievement badges
-
-**Tailwind (React)**:
-```tsx
-className="bg-gradient-to-br from-green-500 to-emerald-500"
-```
-
-**Exact Colors**:
-- Start: `#22C55E` (green-500)
-- End: `#10B981` (emerald-500)
-
-**Kotlin/Compose**:
-```kotlin
-brush = Brush.linearGradient(
-    colors = listOf(
-        Color(0xFF22C55E),
-        Color(0xFF10B981)
     )
 )
 ```
 
-#### 5. Background Decorative Gradient (Ambient)
-**Usage**: Background decoration blobs, ambient lighting effects
+### 3. Success Green Gradient
 
-**Tailwind (React)**:
+**Usage**: Success states, confirmation screens, search button, achievement badges
+
+**CSS/Tailwind**:
 ```tsx
-// Purple blob (top right)
-<div className="absolute -top-20 -right-20 w-64 h-64 bg-gradient-to-br from-purple-300/30 to-purple-500/20 rounded-full blur-3xl" />
-
-// Pink blob (bottom left)
-<div className="absolute -bottom-20 -left-20 w-64 h-64 bg-gradient-to-tr from-pink-300/20 to-purple-300/15 rounded-full blur-3xl" />
+style={{ background: 'linear-gradient(135deg, #4ADE80 0%, #10B981 100%)' }}
 ```
 
-**Exact Colors (with opacity)**:
-- Purple blob: `#D8B4FE/30` to `#A855F7/20`
-- Pink blob: `#F9A8D4/20` to `#D8B4FE/15`
+**With Shadow**:
+```tsx
+style={{
+  background: 'linear-gradient(135deg, #4ADE80 0%, #10B981 100%)',
+  boxShadow: '0 6px 12px rgba(74, 222, 128, 0.3)'
+}}
+```
 
 **Kotlin/Compose**:
 ```kotlin
-// Purple ambient blob
-Box(
-    modifier = Modifier
-        .offset(x = (-80).dp, y = (-80).dp)
-        .size(256.dp)
-        .background(
-            brush = Brush.radialGradient(
-                colors = listOf(
-                    Color(0x4DD8B4FE), // 30% opacity
-                    Color(0x33A855F7)  // 20% opacity
-                )
-            ),
-            shape = CircleShape
+Modifier.background(
+    brush = Brush.linearGradient(
+        colors = listOf(
+            Color(0xFF4ADE80),
+            Color(0xFF10B981)
         )
-        .blur(radiusX = 120.dp, radiusY = 120.dp)
+    )
 )
 ```
 
-#### 6. Gradient Directions Guide
+### 4. Feature Card Gradient (Pink-Purple)
 
-**Horizontal (Left to Right)**: `bg-gradient-to-r`
-- Use for: Wide buttons, horizontal progress bars
-- Energy: Forward movement, progress
+**Usage**: Feature cards, highlighted sections, soft backgrounds
 
-**Vertical (Top to Bottom)**: `bg-gradient-to-b`
-- Use for: Tall containers, screen backgrounds
-- Energy: Natural light direction, calming
-
-**Diagonal (Top-Left to Bottom-Right)**: `bg-gradient-to-br`
-- Use for: Most UI elements, cards, icons
-- Energy: Dynamic, modern, engaging
-- **PREFERRED DIRECTION** for Kavi Kannada
-
-**Diagonal (Bottom-Left to Top-Right)**: `bg-gradient-to-tr`
-- Use for: Alternative decoration, secondary elements
-- Energy: Uplifting, rising
-
-#### 7. Gradient + Shadow Combinations
-
-**Primary Button**:
+**CSS/Tailwind**:
 ```tsx
-className="bg-gradient-to-r from-purple-600 to-purple-500 shadow-lg shadow-purple-500/25"
+style={{ background: 'linear-gradient(135deg, #FFE8F7 0%, #F3EDF7 100%)' }}
 ```
 
-**Icon Container**:
-```tsx
-className="bg-gradient-to-br from-[#6750A4] to-[#7F67BE] shadow-md shadow-purple-500/30"
-```
-
-**Feature Card**:
-```tsx
-className="bg-gradient-to-br from-[#FFE8F7] to-[#F3EDF7] shadow-sm"
-```
-
-**Rule**: Match shadow color to the gradient's dominant color at ~25-30% opacity
-
-#### 8. Complete Component Examples
-
-**Primary CTA Button (Full Featured)**:
-
-*React/Tailwind*:
-```tsx
-<button className="w-full h-14 bg-gradient-to-r from-purple-600 to-purple-500 text-white rounded-full shadow-lg shadow-purple-500/25 flex items-center justify-center gap-2 transition-transform active:scale-95">
-  <Heart className="w-5 h-5" />
-  <span className="font-medium">Continue</span>
-</button>
-```
-
-*Kotlin/Compose*:
+**Kotlin/Compose**:
 ```kotlin
-Button(
-    onClick = { /* action */ },
-    modifier = Modifier
-        .fillMaxWidth()
-        .height(56.dp)
-        .background(
-            brush = Brush.linearGradient(
-                colors = listOf(Color(0xFF9333EA), Color(0xFFA855F7))
-            ),
-            shape = RoundedCornerShape(28.dp)
+Modifier.background(
+    brush = Brush.linearGradient(
+        colors = listOf(
+            Color(0xFFFFE8F7),
+            Color(0xFFF3EDF7)
         )
-        .shadow(8.dp, RoundedCornerShape(28.dp)),
-    colors = ButtonDefaults.buttonColors(
-        containerColor = Color.Transparent
-    ),
-    shape = RoundedCornerShape(28.dp)
-) {
-    Row(
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Icon(
-            imageVector = Icons.Filled.Favorite,
-            contentDescription = null,
-            modifier = Modifier.size(20.dp),
-            tint = Color.White
-        )
-        Text(
-            text = "Continue",
-            fontWeight = FontWeight.Medium,
-            color = Color.White
-        )
-    }
-}
-```
-
-**Gradient Icon Badge**:
-
-*React/Tailwind*:
-```tsx
-<div className="relative">
-  <div className="w-10 h-10 bg-gradient-to-br from-[#6750A4] to-[#7F67BE] rounded-full flex items-center justify-center shadow-md shadow-purple-500/30">
-    <Settings className="w-5 h-5 text-white" />
-  </div>
-  {/* Optional notification dot */}
-  <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white" />
-</div>
-```
-
-*Kotlin/Compose*:
-```kotlin
-Box {
-    Box(
-        modifier = Modifier
-            .size(40.dp)
-            .background(
-                brush = Brush.linearGradient(
-                    colors = listOf(Color(0xFF6750A4), Color(0xFF7F67BE))
-                ),
-                shape = CircleShape
-            )
-            .shadow(4.dp, CircleShape),
-        contentAlignment = Alignment.Center
-    ) {
-        Icon(
-            imageVector = Icons.Filled.Settings,
-            contentDescription = "Settings",
-            tint = Color.White,
-            modifier = Modifier.size(20.dp)
-        )
-    }
-    
-    // Optional notification dot
-    Box(
-        modifier = Modifier
-            .align(Alignment.TopEnd)
-            .offset(x = 4.dp, y = (-4).dp)
-            .size(12.dp)
-            .background(Color(0xFFEF4444), CircleShape)
-            .border(2.dp, Color.White, CircleShape)
     )
-}
+)
 ```
 
-**Feature Card with Gradient Background**:
+### 5. Toolbar Icon Gradients
 
-*React/Tailwind*:
+**Amber (Settings/Actions)**:
 ```tsx
-<div className="bg-gradient-to-br from-[#FFE8F7] to-[#F3EDF7] rounded-[28px] p-6 shadow-sm">
-  <div className="flex items-start gap-4">
-    <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-purple-500 rounded-full flex items-center justify-center shadow-md shadow-purple-500/25 flex-shrink-0">
-      <Heart className="w-6 h-6 text-white" />
-    </div>
-    <div className="flex-1">
-      <h3 className="text-[#1C1B1F] mb-1">Support Development</h3>
-      <p className="text-[#49454F]">Help us keep Kavi Kannada free and open source for everyone.</p>
-    </div>
-  </div>
+style={{ background: 'linear-gradient(135deg, #FBBF24 0%, #F97316 100%)' }}
+```
+
+**Cyan (Clipboard/Web)**:
+```tsx
+style={{ background: 'linear-gradient(135deg, #06B6D4 0%, #0891B2 100%)' }}
+```
+
+**Blue (Info/Help)**:
+```tsx
+style={{ background: 'linear-gradient(135deg, #60A5FA 0%, #06B6D4 100%)' }}
+```
+
+**Purple (Premium/More)**:
+```tsx
+style={{ background: 'linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%)' }}
+```
+
+**Violet (Keyboard/Layout)**:
+```tsx
+style={{ background: 'linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%)' }}
+```
+
+**Red (Delete/Error)**:
+```tsx
+style={{ background: 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)' }}
+```
+
+### 6. Background Decorative Gradients
+
+**Usage**: Background decoration blobs for ambient lighting (with blur-3xl)
+
+**Purple Blob**:
+```tsx
+style={{ 
+  background: 'linear-gradient(135deg, #D8B4FE 0%, #A855F7 100%)',
+  opacity: 0.3,
+  filter: 'blur(96px)'
+}}
+```
+
+**Pink Blob**:
+```tsx
+style={{ 
+  background: 'linear-gradient(135deg, #F9A8D4 0%, #D8B4FE 100%)',
+  opacity: 0.2,
+  filter: 'blur(96px)'
+}}
+```
+
+### Gradient Component Patterns
+
+#### Primary Button with Gradient
+```tsx
+<motion.button
+  whileTap={{ scale: 0.97 }}
+  className="label-large text-white touch-feedback"
+  style={{
+    width: '100%',
+    height: '56px',
+    background: 'linear-gradient(135deg, #6750A4 0%, #7F67BE 100%)',
+    borderRadius: '28px',
+    border: 'none',
+    cursor: 'pointer',
+    boxShadow: '0 8px 16px rgba(103, 80, 164, 0.25)',
+    transition: 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1)'
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.boxShadow = '0 12px 20px rgba(103, 80, 164, 0.35)';
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.boxShadow = '0 8px 16px rgba(103, 80, 164, 0.25)';
+  }}
+>
+  Continue
+</motion.button>
+```
+
+#### Gradient Icon Container
+```tsx
+<div 
+  className="flex items-center justify-center"
+  style={{
+    width: '48px',
+    height: '48px',
+    borderRadius: '16px',
+    background: 'linear-gradient(135deg, #6750A4 0%, #7F67BE 100%)',
+    boxShadow: '0 4px 8px rgba(103, 80, 164, 0.3)'
+  }}
+>
+  <Icon className="w-6 h-6 text-white" />
 </div>
 ```
 
-*Kotlin/Compose*:
-```kotlin
-Card(
-    modifier = Modifier
-        .fillMaxWidth()
-        .background(
-            brush = Brush.linearGradient(
-                colors = listOf(Color(0xFFFFE8F7), Color(0xFFF3EDF7))
-            ),
-            shape = RoundedCornerShape(28.dp)
-        ),
-    shape = RoundedCornerShape(28.dp),
-    elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
-) {
-    Row(
-        modifier = Modifier.padding(24.dp),
-        horizontalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        Box(
-            modifier = Modifier
-                .size(48.dp)
-                .background(
-                    brush = Brush.linearGradient(
-                        colors = listOf(Color(0xFF9333EA), Color(0xFFA855F7))
-                    ),
-                    shape = CircleShape
-                )
-                .shadow(4.dp, CircleShape),
-            contentAlignment = Alignment.Center
-        ) {
-            Icon(
-                imageVector = Icons.Filled.Favorite,
-                contentDescription = null,
-                tint = Color.White,
-                modifier = Modifier.size(24.dp)
-            )
-        }
-        
-        Column(modifier = Modifier.weight(1f)) {
-            Text(
-                text = "Support Development",
-                color = Color(0xFF1C1B1F),
-                style = MaterialTheme.typography.titleMedium
-            )
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = "Help us keep Kavi Kannada free and open source for everyone.",
-                color = Color(0xFF49454F),
-                style = MaterialTheme.typography.bodyMedium
-            )
-        }
-    }
-}
+#### Feature Card with Gradient Background
+```tsx
+<div 
+  className="elevation-1"
+  style={{
+    background: 'linear-gradient(135deg, #FFE8F7 0%, #F3EDF7 100%)',
+    borderRadius: '28px',
+    padding: '24px'
+  }}
+>
+  {/* Card content */}
+</div>
 ```
 
-#### 9. Gradient Best Practices
+### Gradient Best Practices
 
 ✅ **DO**:
-- Use diagonal gradients (`to-br`) for most UI elements
-- Match shadow colors to gradient dominant color
-- Keep gradients subtle (avoid harsh color transitions)
+- Use diagonal gradients (135deg) for most UI elements
+- Match shadow colors to gradient dominant color at 25-30% opacity
+- Keep gradients subtle (avoid harsh transitions)
 - Use consistent gradient pairs across the app
-- Apply gradients to backgrounds, not borders
+- Apply gradients to backgrounds, not borders or text
 
 ❌ **DON'T**:
 - Mix multiple gradient types on the same screen
 - Use gradients on text (poor accessibility)
 - Create custom gradient colors (stick to defined palettes)
 - Overuse gradients (not every element needs one)
-- Use gradients on small elements under 32px
-
-#### 10. Quick Gradient Reference
-
-| Use Case | Gradient | Tailwind Class |
-|----------|----------|----------------|
-| Primary Button | Purple | `bg-gradient-to-r from-purple-600 to-purple-500` |
-| Icon Container | Deep Purple | `bg-gradient-to-br from-[#6750A4] to-[#7F67BE]` |
-| Feature Card | Pink-Purple | `bg-gradient-to-br from-[#FFE8F7] to-[#F3EDF7]` |
-| Success State | Green | `bg-gradient-to-br from-green-500 to-emerald-500` |
-| Background Blob | Purple (30%) | `bg-gradient-to-br from-purple-300/30 to-purple-500/20` |
-| FAB (Floating) | Purple + Shadow | `bg-gradient-to-br from-purple-600 to-purple-500 shadow-lg shadow-purple-500/30` |
+- Use gradients on elements smaller than 32px
 
 ---
 
-## Component-Specific Guidelines
+## Animation System
 
-### Buttons
+### Timing Functions (Material You Standard)
 
-#### Primary Button
-- **Height**: 56px (14 in Tailwind = 56px)
-- **Border Radius**: 28px (rounded-full for pill shape)
-- **Background**: Gradient (`from-purple-600 to-purple-500`)
-- **Shadow**: Include colored shadow for depth
-- **Text**: White, medium weight
-- **Icon**: 20px size, 8px gap from text
-- **Usage**: Maximum 1 primary button per screen section
+```javascript
+// Standard easing - most common
+cubic-bezier(0.4, 0, 0.2, 1)
 
+// Decelerate - entering screen
+cubic-bezier(0.0, 0.0, 0.2, 1)
+
+// Accelerate - exiting screen
+cubic-bezier(0.4, 0.0, 1.0, 1.0)
+
+// Spring animations - playful interactions
+{ type: "spring", damping: 25, stiffness: 300 }
+{ type: "spring", damping: 12, stiffness: 200 } // Bouncier
+```
+
+### Duration Standards
+
+```
+Quick interactions: 150ms  (button press, toggle)
+Standard transitions: 300ms (slide-in, fade, most animations)
+Screen changes: 500ms      (page transitions, bottom sheets)
+Never exceed: 700ms        (feels sluggish)
+```
+
+### Common Animation Patterns
+
+#### Fade + Slide In
 ```tsx
-// Example
-<button className="w-full h-14 bg-gradient-to-r from-purple-600 to-purple-500 text-white rounded-full shadow-lg shadow-purple-500/25">
-  Continue
-</button>
+initial={{ opacity: 0, y: 30 }}
+animate={{ opacity: 1, y: 0 }}
+transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
 ```
 
-#### Secondary Button
-- **Height**: 56px
-- **Border Radius**: 28px
-- **Background**: `#E8DEF8` (light purple)
-- **Text**: `#6750A4` (purple), medium weight
-- **Usage**: For alternative actions alongside primary buttons
-
-#### Tertiary/Text Button
-- **Height**: 48px
-- **No background** - just text
-- **Text**: `#6750A4`, regular weight
-- **Hover**: Add background `#E8DEF8` with 30% opacity
-- **Usage**: For less important actions (Skip, Cancel)
-
-### Cards
-
-#### Standard Card
-- **Border Radius**: 20px
-- **Background**: White (`#FFFFFF`)
-- **Padding**: 16-20px
-- **Shadow**: Subtle (`shadow-sm`)
-- **Border**: None (use shadow for depth)
-
-#### Feature Card (with gradient)
-- **Border Radius**: 28px
-- **Background**: Gradient or tinted (`from-[#FFE8F7] to-[#F3EDF7]`)
-- **Padding**: 24px
-- **Shadow**: Soft shadow
-- **Usage**: Highlight important features or CTAs
-
-### Icons
-
-#### Sizing
-- **Small**: 16px (toolbar badges, inline icons)
-- **Medium**: 20px (buttons, list items)
-- **Large**: 24px (headers, feature icons)
-- **Hero**: 56px+ (welcome screens, success states)
-
-#### Gradient Icon Containers
-- **Size**: 40px container, 20px icon
-- **Shape**: Circle
-- **Shadow**: Colored shadow matching gradient
-- **Usage**: Toolbar icons, feature highlights
-
+#### Scale on Press (Touch Feedback)
 ```tsx
-<div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-purple-500 rounded-full flex items-center justify-center shadow-md shadow-purple-500/30">
-  <Icon className="w-5 h-5 text-white" />
-</div>
+whileTap={{ scale: 0.97 }}
+className="touch-feedback" // Adds transition: transform 150ms
 ```
 
-### Input Fields
-
-- **Height**: 48px minimum (for text inputs)
-- **Border Radius**: 16px
-- **Background**: `#F3EDF7` (light purple tint)
-- **Border**: None when unfocused, 2px purple when focused
-- **Padding**: 12px horizontal
-- **Placeholder Color**: `#79747E`
-
-### Badges/Chips
-
-- **Height**: Auto (based on content + 8px vertical padding)
-- **Border Radius**: 12px (or `9999px` for pill style)
-- **Padding**: 12px horizontal, 4-6px vertical
-- **Font Size**: 11-12px (label small)
-- **Colors**: Use semantic colors based on type
-  - Web: Blue background `#EFF6FF`, blue text
-  - Phone: Green background `#F0FDF4`, green text
-  - Email: Purple background `#FAF5FF`, purple text
-  - Text: Amber background `#FFFBEB`, amber text
-
----
-
-## Animation Guidelines
-
-### Timing
-- **Quick interactions**: 150ms (button press, toggle)
-- **Standard transitions**: 300ms (slide-in, fade)
-- **Screen changes**: 500ms (page transitions)
-- **Never exceed**: 700ms (feels sluggish)
-
-### Easing
-- **Standard**: Use default easing for most animations
-- **Spring**: Use for playful interactions (success animations, bouncy buttons)
-- **Ease-out**: Use for elements entering the screen
-- **Ease-in**: Use for elements exiting the screen
-
-### Scale Animations
-- **Button press**: Scale down to 0.95 (use `whileTap={{ scale: 0.97 }}`)
-- **Icon pop**: Scale from 0 to 1 on appear
-- **Never scale above 1.1** - looks jarring
-
-### Stagger Animations
-- **Delay**: 40-50ms between items
-- **Max stagger items**: 8 items (longer lists look slow)
-- **Usage**: List items appearing, toolbar icons
-
-```tsx
-// Example stagger
-transition={{ delay: index * 0.04 }}
-```
-
-### Entrance Animations
-- **Fade + Slide**: Combine for smooth entrances
-- **Slide distance**: 20-40px maximum
-- **Fade duration**: Match slide duration
-
----
-
-## Keyboard-Specific Rules
-
-### Key Layout
-- **Aspect Ratio**: Keys should be roughly square or slightly wider
-- **Gap**: 4px between keys (use `gap-1` in Tailwind)
-- **Border Radius**: 12px per key
-- **Background**: White with subtle shadow
-- **Pressed State**: Scale 0.95, background tint
-
-### Keyboard Heights
-- **Small**: 220px
-- **Medium**: 260px (default)
-- **Large**: 300px
-- **Extra Large**: 340px
-
-### Suggestion Bar
-- **Height**: 40px
-- **Chip Style**: Pill-shaped, light purple background
-- **Spacing**: 8px gap between suggestions
-- **Scroll**: Horizontal scroll if overflow
-
-### Toolbar
-- **Position**: Fixed at bottom of keyboard
-- **Height**: 48px
-- **Background**: Slight gradient or blur
-- **Icons**: 40px gradient containers with colored shadows
-- **Spacing**: Even distribution or 12px gap
-
----
-
-## Screen-Specific Guidelines
-
-### Welcome Screen
-- **Logo**: Centered, 120px size minimum
-- **Title**: HeadlineLarge (32px)
-- **Description**: BodyLarge (16px)
-- **CTA Button**: Full width, gradient primary
-- **Background**: Include subtle gradient decoration (blur-3xl)
-
-### Keyboard Selection Screen
-- **Step-by-step**: Number each instruction
-- **Visuals**: Include mock screenshots or icons
-- **Progress**: Show step X of Y
-- **CTA**: "Continue" button at bottom
-
-### Thank You Screen
-- **Success Icon**: 112px (28 in Tailwind) gradient circle
-- **Particles**: 8 particles animating outward (optional)
-- **Card**: Feature card for donation/support message
-- **Actions**: 2-3 buttons stacked vertically
-
-### Settings Screen
-- **Header**: Sticky with logo + title
-- **Sections**: Grouped with section titles
-- **List Items**: 72px height, icon + text + action
-- **Dividers**: Between items in same section
-- **Footer**: Version info, attribution
-
-### Donation Screen
-- **Preset Amounts**: Grid layout, 2 columns
-- **Custom Amount**: Prominent input field
-- **UPI Simulation**: Mock UPI apps with icons
-- **Explanation Link**: Always provide "Why donate?" link
-
----
-
-## Accessibility Requirements
-
-### Touch Targets
-- **Minimum size**: 48px × 48px
-- **Ideal size**: 56px × 56px for primary actions
-- **Spacing**: 8px minimum between touchable elements
-
-### Color Contrast
-- **Text on light background**: Minimum 4.5:1 contrast ratio
-- **Large text (18px+)**: Minimum 3:1 contrast ratio
-- **Icons**: Same as text requirements
-- **Test**: All primary/secondary color combinations
-
-### Focus States
-- **Visible focus ring**: 2px purple outline with offset
-- **Keyboard navigation**: Tab order must be logical
-- **Skip links**: Provide for long lists
-
-### Screen Reader Support
-- **Images**: Always include `alt` text
-- **Buttons**: Descriptive labels (not just "Click here")
-- **Icons**: Include `aria-label` when no text
-- **Headings**: Proper hierarchy (h1 → h2 → h3)
-
----
-
-## Data & State Management
-
-### LocalStorage Keys
-- `kavi_keyboard_height`: "small" | "medium" | "large" | "extra_large"
-- `kavi_settings`: JSON object with all settings
-- `kavi_clipboard_items`: Array of clipboard items
-- `kavi_keyboard_layout`: "modern" | "inscript" | "phonetic"
-
-### Settings Object Structure
-```typescript
-{
-  keyBorders: boolean,
-  sound: boolean,
-  vibration: boolean,
-  popup: boolean,
-  autoCorrection: boolean,
-  autoCapitalization: boolean,
-  suggestions: boolean,
-  keyboardHeight: string,
-  layout: string
-}
-```
-
-### Clipboard Item Structure
-```typescript
-{
-  id: string,
-  text: string,
-  type: "web" | "phone" | "email" | "text",
-  timestamp: number,
-  isPinned: boolean
-}
-```
-
----
-
-## File Organization
-
-### Component Structure
-```
-/components
-  /[ScreenName].tsx        # Main screens
-  /[FeatureName]Panel.tsx  # Panels/overlays
-  /settings
-    /[SettingPage].tsx     # Setting sub-pages
-  /ui
-    /[component].tsx       # Shared UI components
-```
-
-### Naming Conventions
-- **Components**: PascalCase (`KeyboardDemo.tsx`)
-- **Utilities**: camelCase (`formatTime.ts`)
-- **Constants**: UPPER_SNAKE_CASE (`MAX_CLIPBOARD_ITEMS`)
-- **CSS files**: kebab-case (`globals.css`)
-
----
-
-## Testing Checklist
-
-Before considering a feature complete:
-
-- [ ] Works on 360px width (smallest mobile)
-- [ ] Works on 768px width (tablet)
-- [ ] All animations are smooth (no jank)
-- [ ] Touch targets are 48px minimum
-- [ ] Text is readable (proper contrast)
-- [ ] No console errors or warnings
-- [ ] LocalStorage persists correctly
-- [ ] Loading states are handled
-- [ ] Error states are handled
-- [ ] Works without JavaScript (where possible)
-
----
-
-## Common Patterns
-
-### Modal/Dialog
-```tsx
-<AnimatePresence>
-  {isOpen && (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black/40 flex items-center justify-center p-5 z-50"
-      onClick={onClose}
-    >
-      <motion.div
-        initial={{ scale: 0.9, y: 20 }}
-        animate={{ scale: 1, y: 0 }}
-        exit={{ scale: 0.9, y: 20 }}
-        onClick={(e) => e.stopPropagation()}
-        className="bg-white rounded-[28px] p-6 max-w-sm w-full"
-      >
-        {/* Content */}
-      </motion.div>
-    </motion.div>
-  )}
-</AnimatePresence>
-```
-
-### List with Stagger Animation
+#### Stagger List Items
 ```tsx
 {items.map((item, index) => (
   <motion.div
     key={item.id}
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: index * 0.04 }}
+    transition={{ 
+      delay: index * 0.04,  // 40ms stagger
+      duration: 0.4,
+      ease: [0.4, 0, 0.2, 1]
+    }}
   >
     {/* Item content */}
   </motion.div>
 ))}
 ```
 
-### Swipeable Item
+#### Spring Pop Animation
 ```tsx
-const [offsetX, setOffsetX] = useState(0);
+initial={{ scale: 0, rotate: -20 }}
+animate={{ scale: 1, rotate: 0 }}
+transition={{ 
+  type: "spring", 
+  stiffness: 200,
+  damping: 12
+}}
+```
 
-<motion.div
-  drag="x"
-  dragConstraints={{ left: -200, right: 0 }}
-  dragElastic={0.1}
-  onDragEnd={(e, info) => {
-    if (info.offset.x < -150) {
-      onDelete();
-    } else {
-      setOffsetX(0);
-    }
+#### Bottom Sheet Slide Up
+```tsx
+initial={{ y: "100%" }}
+animate={{ y: 0 }}
+exit={{ y: "100%" }}
+transition={{ type: "spring", damping: 25, stiffness: 300 }}
+```
+
+---
+
+## Component Patterns (Material You 2025)
+
+### Buttons
+
+#### Primary Button (Gradient)
+```tsx
+<motion.button
+  whileTap={{ scale: 0.97 }}
+  className="label-large text-white touch-feedback"
+  style={{
+    width: '100%',
+    height: '56px',
+    background: 'linear-gradient(135deg, #6750A4 0%, #7F67BE 100%)',
+    borderRadius: '28px',
+    border: 'none',
+    cursor: 'pointer',
+    boxShadow: '0 8px 16px rgba(103, 80, 164, 0.25)',
+    transition: 'box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1)'
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.boxShadow = '0 12px 20px rgba(103, 80, 164, 0.35)';
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.boxShadow = '0 8px 16px rgba(103, 80, 164, 0.25)';
   }}
 >
-  {/* Swipeable content */}
-</motion.div>
+  Continue
+</motion.button>
 ```
+
+**Specs**:
+- Height: **56px**
+- Border radius: **28px**
+- Font: **label-large**
+- Shadow: Colored, elevation increases on hover
+- Touch feedback: scale(0.97)
+
+#### Secondary Button (Filled Tonal)
+```tsx
+<motion.button
+  whileTap={{ scale: 0.97 }}
+  className="label-large touch-feedback"
+  style={{
+    width: '100%',
+    height: '56px',
+    backgroundColor: '#E8DEF8',
+    color: '#6750A4',
+    borderRadius: '28px',
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'background-color 150ms cubic-bezier(0.4, 0, 0.2, 1)'
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.backgroundColor = '#D7C6ED';
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.backgroundColor = '#E8DEF8';
+  }}
+>
+  Settings
+</motion.button>
+```
+
+**Specs**:
+- Height: **56px**
+- Background: **#E8DEF8** (primary container)
+- Text: **#6750A4** (primary)
+- Hover: Darker tint
+
+#### Text Button
+```tsx
+<motion.button
+  whileTap={{ scale: 0.97 }}
+  className="label-large touch-feedback"
+  style={{
+    width: '100%',
+    height: '48px',
+    backgroundColor: 'transparent',
+    color: '#6750A4',
+    borderRadius: '24px',
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'background-color 150ms cubic-bezier(0.4, 0, 0.2, 1)'
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.backgroundColor = 'rgba(103, 80, 164, 0.08)';
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.backgroundColor = 'transparent';
+  }}
+>
+  Skip for now
+</motion.button>
+```
+
+**Specs**:
+- Height: **48px** (smaller than filled buttons)
+- No background, just state layer on hover
+- 8% opacity state layer
+
+### Cards
+
+#### Standard Card (Material Surface)
+```tsx
+<div 
+  className="elevation-1"
+  style={{
+    backgroundColor: '#FFFFFF',
+    borderRadius: '20px',
+    padding: '16px'
+  }}
+>
+  {/* Card content */}
+</div>
+```
+
+**Specs**:
+- Background: **#FFFFFF**
+- Border radius: **20px**
+- Padding: **16-24px**
+- Elevation: **elevation-1**
+
+#### Feature Card (Gradient Background)
+```tsx
+<div 
+  className="elevation-1"
+  style={{
+    background: 'linear-gradient(135deg, #FFE8F7 0%, #F3EDF7 100%)',
+    borderRadius: '28px',
+    padding: '24px'
+  }}
+>
+  {/* Card content */}
+</div>
+```
+
+**Specs**:
+- Background: Gradient
+- Border radius: **28px** (larger for prominence)
+- Padding: **24px**
+
+### Icon Buttons (Gradient Containers)
+
+```tsx
+<div 
+  className="flex items-center justify-center"
+  style={{
+    width: '40px',
+    height: '40px',
+    borderRadius: '20px',
+    background: 'linear-gradient(135deg, #6750A4 0%, #7F67BE 100%)',
+    boxShadow: '0 4px 8px rgba(103, 80, 164, 0.3)',
+    cursor: 'pointer'
+  }}
+>
+  <Icon className="w-5 h-5 text-white" strokeWidth={2.5} />
+</div>
+```
+
+**Specs**:
+- Size: **40-48px** container
+- Icon: **20-24px**
+- Border radius: **Full circle** (50%)
+- Shadow: Colored to match gradient
+- Stroke width: **2.5** for icons
+
+### Bottom Sheet (Material You)
+
+```tsx
+<AnimatePresence>
+  {isOpen && (
+    <>
+      {/* Scrim */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.2 }}
+        className="fixed inset-0 z-40"
+        style={{ backgroundColor: 'rgba(0, 0, 0, 0.4)' }}
+        onClick={onClose}
+      />
+      
+      {/* Sheet */}
+      <motion.div
+        initial={{ y: "100%" }}
+        animate={{ y: 0 }}
+        exit={{ y: "100%" }}
+        transition={{ type: "spring", damping: 25, stiffness: 300 }}
+        className="fixed bottom-0 left-0 right-0 z-50 elevation-5"
+        style={{
+          backgroundColor: '#FEF7FF',
+          borderTopLeftRadius: '32px',
+          borderTopRightRadius: '32px',
+          padding: '0 16px 16px'
+        }}
+      >
+        {/* Drag handle */}
+        <div className="flex justify-center pt-4 pb-2">
+          <div 
+            style={{ 
+              width: '32px', 
+              height: '4px', 
+              backgroundColor: '#CAC4D0',
+              borderRadius: '2px'
+            }}
+          />
+        </div>
+        
+        {/* Sheet content */}
+      </motion.div>
+    </>
+  )}
+</AnimatePresence>
+```
+
+**Specs**:
+- Scrim: **rgba(0, 0, 0, 0.4)**
+- Top radius: **32px**
+- Drag handle: **32px × 4px**, **#CAC4D0**
+- Elevation: **elevation-5**
+- Spring animation: damping 25, stiffness 300
+
+### Chips & Suggestions
+
+```tsx
+<button
+  className="label-large touch-feedback"
+  style={{
+    padding: '10px 12px',
+    backgroundColor: '#FFFFFF',
+    borderRadius: '16px',
+    color: '#1C1B1F',
+    border: 'none',
+    cursor: 'pointer',
+    boxShadow: 'var(--elevation-1)',
+    transition: 'background-color 150ms'
+  }}
+  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#F3EDF7'}
+  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#FFFFFF'}
+>
+  Suggestion text
+</button>
+```
+
+**Specs**:
+- Padding: **10-12px horizontal**, **10px vertical**
+- Border radius: **16px** or **full** (pill)
+- Background: **#FFFFFF** with hover state
+- Font: **label-large** or **body-medium**
+
+### Keyboard Keys
+
+```tsx
+<button
+  className="touch-feedback"
+  style={{
+    height: '48px',
+    backgroundColor: '#FFFFFF',
+    borderRadius: '12px',
+    border: 'none',
+    cursor: 'pointer',
+    boxShadow: 'var(--elevation-1)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative',
+    transition: 'all 150ms'
+  }}
+>
+  <span className="title-medium" style={{ color: '#1C1B1F' }}>
+    A
+  </span>
+</button>
+```
+
+**Specs**:
+- Height: **48px**
+- Border radius: **12px**
+- Background: **#FFFFFF**
+- Shadow: **elevation-1**
+- Font: **title-medium** for letters
 
 ---
 
 ## Icon Libraries
 
 ### Web (React/TypeScript) - Lucide React
-**Library**: Lucide React
-**Website**: https://lucide.dev/icons/
+
+**Library**: Lucide React  
+**Website**: https://lucide.dev/icons/  
 **Package**: `lucide-react`
 
 **Installation**:
@@ -872,50 +897,28 @@ npm install lucide-react
 
 **Usage**:
 ```tsx
-import { Heart, Settings, Keyboard, User, Search } from 'lucide-react';
+import { Heart, Settings, Keyboard, ChevronRight } from 'lucide-react';
 
 // Basic usage
-<Heart className="w-5 h-5 text-purple-600" />
-
-// With custom size and color
-<Settings className="w-6 h-6 text-[#6750A4]" />
+<Heart className="w-5 h-5" style={{ color: '#6750A4' }} />
 
 // In gradient container
-<div className="w-10 h-10 bg-gradient-to-br from-purple-600 to-purple-500 rounded-full flex items-center justify-center">
-  <Keyboard className="w-5 h-5 text-white" />
+<div 
+  style={{
+    width: '48px',
+    height: '48px',
+    borderRadius: '16px',
+    background: 'linear-gradient(135deg, #6750A4 0%, #7F67BE 100%)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }}
+>
+  <Settings className="w-6 h-6 text-white" strokeWidth={2} />
 </div>
 ```
 
-**Common Icons Used in Kavi Kannada**:
-- `Heart` - Donation, favorites
-- `Settings` - Settings, configuration
-- `Keyboard` - Keyboard-related actions
-- `ChevronRight`, `ChevronLeft`, `ChevronDown` - Navigation arrows
-- `Check`, `CheckCircle2` - Success states
-- `X`, `XCircle` - Close, cancel, delete
-- `Search` - Search functionality
-- `Trash2` - Delete actions
-- `Pin`, `PinOff` - Pin/unpin items
-- `Copy`, `Clipboard` - Clipboard actions
-- `Globe` - Web links
-- `Phone` - Phone numbers
-- `Mail` - Email addresses
-- `Type` - Text/typing
-- `Volume2` - Sound settings
-- `Vibrate` - Haptic feedback
-- `Palette` - Themes/colors
-- `Languages` - Language selection
-- `Info` - Information
-- `Moon` - Dark mode
-- `Shield` - Privacy
-- `Bell` - Notifications
-- `Zap` - Quick actions
-- `Maximize2` - Size/height
-- `MessageSquare` - Messages/suggestions
-- `Undo2`, `Redo2` - Undo/redo actions
-- `MoreHorizontal` - More options menu
-
-**Icon Sizing Guide**:
+**Icon Sizing**:
 ```tsx
 // Small (16px) - Inline icons, badges
 <Icon className="w-4 h-4" />
@@ -933,11 +936,42 @@ import { Heart, Settings, Keyboard, User, Search } from 'lucide-react';
 **Stroke Width**:
 - Default: `strokeWidth={2}` (standard)
 - Thin: `strokeWidth={1.5}` (delicate icons)
-- Bold: `strokeWidth={2.5}` (emphasis)
+- Bold: `strokeWidth={2.5}` (emphasis, important actions)
+
+**Common Icons in Kavi Kannada**:
+```
+Heart - Donation, favorites
+Settings - Settings, configuration
+Keyboard - Keyboard actions
+ChevronRight, ChevronLeft, ChevronDown - Navigation
+Check, CheckCircle2 - Success states
+X, XCircle - Close, cancel
+Search - Search functionality
+Trash2 - Delete actions
+Copy, Clipboard - Clipboard actions
+Globe - Web links
+Phone - Phone numbers
+Mail - Email addresses
+Volume2 - Sound settings
+Vibrate - Haptic feedback
+Palette - Themes
+Languages - Language selection
+Info - Information
+Moon - Dark mode
+Shield - Privacy
+Maximize2 - Size/height
+MessageSquare - Messages
+Undo2, Redo2 - Undo/redo
+MoreHorizontal - More options
+Mic - Voice input
+Zap - Quick actions
+Type - Text/typing
+```
 
 ### Android (Kotlin/Jetpack Compose) - Material Icons
-**Library**: Material Icons (Built into Jetpack Compose)
-**Website**: https://fonts.google.com/icons
+
+**Library**: Material Icons (Built into Jetpack Compose)  
+**Website**: https://fonts.google.com/icons  
 **Documentation**: https://developer.android.com/jetpack/compose/graphics/images/material-icons
 
 **Installation**:
@@ -953,7 +987,6 @@ dependencies {
 ```kotlin
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
-import androidx.compose.material.icons.outlined.*
 
 // Basic usage
 Icon(
@@ -966,12 +999,12 @@ Icon(
 // In gradient container
 Box(
     modifier = Modifier
-        .size(40.dp)
+        .size(48.dp)
         .background(
             brush = Brush.linearGradient(
                 colors = listOf(Color(0xFF6750A4), Color(0xFF7F67BE))
             ),
-            shape = CircleShape
+            shape = RoundedCornerShape(16.dp)
         ),
     contentAlignment = Alignment.Center
 ) {
@@ -979,76 +1012,201 @@ Box(
         imageVector = Icons.Filled.Settings,
         contentDescription = "Settings",
         tint = Color.White,
-        modifier = Modifier.size(20.dp)
+        modifier = Modifier.size(24.dp)
     )
 }
 ```
 
 **Material Icons Mapping** (Lucide → Material Icons):
-- `Heart` → `Icons.Filled.Favorite` / `Icons.Outlined.FavoriteBorder`
-- `Settings` → `Icons.Filled.Settings`
-- `Keyboard` → `Icons.Filled.Keyboard`
-- `ChevronRight` → `Icons.Filled.ChevronRight`
-- `Check` → `Icons.Filled.Check`
-- `CheckCircle2` → `Icons.Filled.CheckCircle`
-- `X` → `Icons.Filled.Close`
-- `Search` → `Icons.Filled.Search`
-- `Trash2` → `Icons.Filled.Delete`
-- `Pin` → `Icons.Filled.PushPin`
-- `Copy` → `Icons.Filled.ContentCopy`
-- `Globe` → `Icons.Filled.Language`
-- `Phone` → `Icons.Filled.Phone`
-- `Mail` → `Icons.Filled.Email`
-- `Type` → `Icons.Filled.TextFields`
-- `Volume2` → `Icons.Filled.VolumeUp`
-- `Vibrate` → `Icons.Filled.Vibration`
-- `Palette` → `Icons.Filled.Palette`
-- `Languages` → `Icons.Filled.Translate`
-- `Info` → `Icons.Filled.Info`
-- `Moon` → `Icons.Filled.DarkMode`
-- `Shield` → `Icons.Filled.Shield`
-- `Bell` → `Icons.Filled.Notifications`
-- `Zap` → `Icons.Filled.Bolt`
-- `Maximize2` → `Icons.Filled.Fullscreen`
-- `MessageSquare` → `Icons.Filled.Message`
-- `Undo2` → `Icons.Filled.Undo`
-- `Redo2` → `Icons.Filled.Redo`
-- `MoreHorizontal` → `Icons.Filled.MoreHoriz`
-
-**Icon Sizing in Compose**:
-```kotlin
-// Small (16dp)
-Modifier.size(16.dp)
-
-// Medium (20dp) - Default
-Modifier.size(20.dp)
-
-// Large (24dp)
-Modifier.size(24.dp)
-
-// Extra Large (32dp+)
-Modifier.size(32.dp)
+```
+Heart → Icons.Filled.Favorite
+Settings → Icons.Filled.Settings
+Keyboard → Icons.Filled.Keyboard
+ChevronRight → Icons.Filled.ChevronRight
+Check → Icons.Filled.Check
+CheckCircle2 → Icons.Filled.CheckCircle
+X → Icons.Filled.Close
+Search → Icons.Filled.Search
+Trash2 → Icons.Filled.Delete
+Copy → Icons.Filled.ContentCopy
+Globe → Icons.Filled.Language
+Phone → Icons.Filled.Phone
+Mail → Icons.Filled.Email
+Volume2 → Icons.Filled.VolumeUp
+Vibrate → Icons.Filled.Vibration
+Palette → Icons.Filled.Palette
+Languages → Icons.Filled.Translate
+Info → Icons.Filled.Info
+Moon → Icons.Filled.DarkMode
+Shield → Icons.Filled.Shield
+Maximize2 → Icons.Filled.Fullscreen
+MessageSquare → Icons.Filled.Message
+Undo2 → Icons.Filled.Undo
+Redo2 → Icons.Filled.Redo
+MoreHorizontal → Icons.Filled.MoreHoriz
+Mic → Icons.Filled.Mic
 ```
 
 ---
 
-## Platform-Specific Notes
+## Accessibility Requirements
 
-### Web (React/TypeScript)
-- **CSS Framework**: Tailwind CSS for styling
-- **Animation**: Motion/React (formerly Framer Motion)
-- **State**: React hooks (useState, useEffect, etc.)
-- **Persistence**: LocalStorage for settings and data
-- **Icons**: Lucide React (https://lucide.dev/icons/)
-- **Fonts**: System fonts (SF Pro on iOS, Roboto on Android)
+### Touch Targets
+- **Minimum size**: 48px × 48px (Material Design standard)
+- **Ideal size**: 56px × 56px for primary actions
+- **Spacing**: 8px minimum between touchable elements
 
-### Android (Kotlin/Jetpack Compose)
-- **UI Framework**: Jetpack Compose with Material Design 3
-- **State**: Jetpack Compose state management (remember, mutableStateOf)
-- **Persistence**: SharedPreferences for settings, Room for complex data
-- **Icons**: Material Icons (https://fonts.google.com/icons)
-- **Fonts**: Roboto (default Material Design font)
-- **Reference**: `/guidelines/DesignSystem.md` for exact color/spacing values
+### Color Contrast
+- **Text on light background**: Minimum 4.5:1 contrast ratio
+- **Large text (18px+)**: Minimum 3:1 contrast ratio
+- **Icons**: Same as text requirements
+- **Test all combinations**: Primary/secondary color pairs
+
+### Focus States
+- **Visible focus ring**: 2px purple outline with 2px offset
+- **Keyboard navigation**: Logical tab order
+- **Focus visible**: Use `:focus-visible` for keyboard-only focus
+
+```css
+*:focus-visible {
+  outline: 2px solid #6750A4;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+```
+
+### Screen Reader Support
+- **Images**: Always include `alt` text
+- **Buttons**: Descriptive labels (not "Click here")
+- **Icons**: Include `aria-label` when no visible text
+- **Headings**: Proper hierarchy (h1 → h2 → h3)
+
+---
+
+## Keyboard-Specific Rules
+
+### Key Layout
+- **Aspect Ratio**: Keys roughly square or slightly wider
+- **Gap**: 6px between keys
+- **Border Radius**: 12px per key
+- **Background**: White (#FFFFFF) with elevation-1
+- **Pressed State**: scale(0.97), subtle background tint
+
+### Keyboard Heights
+```
+Small: 220px
+Medium: 260px (default)
+Large: 300px
+Extra Large: 340px
+```
+
+### Suggestion Bar
+- **Height**: 40-48px
+- **Chip Style**: 16px radius, white background
+- **Spacing**: 8px gap between suggestions
+- **Scroll**: Horizontal scroll if overflow
+
+### Toolbar
+- **Position**: Above keyboard keys
+- **Height**: 56px (includes padding)
+- **Icons**: 40px gradient containers
+- **Spacing**: Even distribution or 8px gap
+
+---
+
+## Screen-Specific Guidelines
+
+### Welcome Screen
+- Logo in gradient container (32px radius)
+- Title: **headline-large**
+- Description: **body-large**
+- CTA: Full-width primary gradient button
+- Background: Decorative gradient blobs with blur
+
+### Keyboard Selection Screen
+- Bottom sheet with 32px top radius
+- Drag handle: 32px × 4px
+- Radio buttons: Material You style with spring animation
+- Scrim: rgba(0, 0, 0, 0.4)
+
+### Thank You Screen
+- Success icon: 112px gradient circle
+- Particle effects: 8 particles radiating outward
+- Feature card: Pink-purple gradient background
+- Actions: Stacked button hierarchy
+
+### Settings Screen
+- Sticky header with elevation
+- Sections grouped with label-large titles
+- List items: 72px height minimum
+- Icon containers: 48px with gradients
+- Dividers: 1px #E7E0EC, offset from left
+
+### Donation Screen
+- Amount grid: 2 columns
+- Selected state: Primary gradient
+- UPI simulation: Mock payment flow
+- Explanation link: Always provide context
+
+---
+
+## Data & State Management
+
+### LocalStorage Keys
+```
+kavi_keyboard_height: "small" | "medium" | "large" | "extra_large"
+kavi_settings: JSON object with all settings
+kavi_clipboard_items: Array of clipboard items
+kavi_keyboard_layout: "modern" | "inscript" | "phonetic"
+```
+
+### Settings Object Structure
+```typescript
+{
+  keyBorders: boolean,
+  sound: boolean,
+  vibration: boolean,
+  popup: boolean,
+  autoCorrection: boolean,
+  autoCapitalization: boolean,
+  suggestions: boolean,
+  keyboardHeight: string,
+  layout: string,
+  darkMode: boolean,
+  notifications: boolean
+}
+```
+
+### Clipboard Item Structure
+```typescript
+{
+  id: string,
+  text: string,
+  type: "web" | "phone" | "email" | "text",
+  timestamp: number,
+  isPinned: boolean
+}
+```
+
+---
+
+## Testing Checklist
+
+Before considering a feature complete:
+
+- [ ] Works on 360px width (smallest mobile)
+- [ ] Works on 768px width (tablet)
+- [ ] All animations are smooth (60fps)
+- [ ] Touch targets are 48px minimum
+- [ ] Text is readable (4.5:1 contrast)
+- [ ] Typography uses CSS classes (not Tailwind text utils)
+- [ ] Gradients use exact color codes from guidelines
+- [ ] Elevation shadows are subtle and appropriate
+- [ ] No console errors or warnings
+- [ ] LocalStorage persists correctly
+- [ ] Loading states are handled
+- [ ] Error states are handled
+- [ ] Focus states are visible
 
 ---
 
@@ -1058,43 +1216,106 @@ Modifier.size(32.dp)
 ```
 Background: #FEF7FF
 Surface: #FFFFFF
-Card Tint: #F3EDF7
+Surface Tint: #F3EDF7
 Primary: #6750A4
-Primary Light: #E8DEF8
-Text: #1C1B1F
+Primary Container: #E8DEF8
+Text Primary: #1C1B1F
 Text Secondary: #49454F
 Text Tertiary: #79747E
-Outline: #E8DEF8
+Outline: #E7E0EC
 ```
 
 ### Most Used Spacing
 ```
-xs: 4px (gap-1)
-sm: 8px (gap-2)
-md: 12px (gap-3)
-lg: 16px (gap-4)
-xl: 20px (p-5)
-xxl: 24px (gap-6)
+xs: 4px
+sm: 8px
+md: 12px
+lg: 16px
+xl: 20px (screen padding)
+xxl: 24px (section gaps)
+xxxl: 32px
 ```
 
-### Most Used Radius
+### Most Used Border Radius
 ```
-Small: 12px (rounded-xl)
-Medium: 20px (rounded-[20px])
-Large: 28px (rounded-[28px])
-Full: 9999px (rounded-full)
+Small: 12px (chips, keys)
+Medium: 20px (cards)
+Large: 28px (buttons, large cards)
+Extra Large: 32px (bottom sheets)
+Full: 9999px (circles)
 ```
+
+### Typography Classes (Use these instead of Tailwind)
+```
+.headline-large - Page titles (32px)
+.headline-medium - Section headers (28px)
+.title-large - Card titles (22px)
+.title-medium - List items (16px, medium weight)
+.body-large - Body text (16px)
+.body-medium - Secondary text (14px)
+.body-small - Captions (12px)
+.label-large - Buttons (14px, medium weight)
+.label-medium - Small buttons (12px)
+.label-small - Badges (11px)
+```
+
+### Elevation Classes
+```
+.elevation-1 - Cards at rest
+.elevation-2 - Standard surfaces
+.elevation-3 - Floating buttons
+.elevation-4 - Dialogs
+.elevation-5 - Bottom sheets
+```
+
+### Common Gradients
+```tsx
+// Primary purple
+background: 'linear-gradient(135deg, #6750A4 0%, #7F67BE 100%)'
+
+// Pink-rose
+background: 'linear-gradient(135deg, #EC4899 0%, #F43F5E 100%)'
+
+// Success green
+background: 'linear-gradient(135deg, #4ADE80 0%, #10B981 100%)'
+
+// Feature card
+background: 'linear-gradient(135deg, #FFE8F7 0%, #F3EDF7 100%)'
+```
+
+---
+
+## Platform-Specific Notes
+
+### Web (React/TypeScript)
+- **CSS Framework**: Tailwind CSS + custom Material You tokens
+- **Animation**: Motion/React (Framer Motion)
+- **State**: React hooks (useState, useEffect, useContext)
+- **Persistence**: LocalStorage for settings and data
+- **Icons**: Lucide React (https://lucide.dev/icons/)
+- **Fonts**: System fonts (SF Pro on iOS, Roboto on Android)
+
+### Android (Kotlin/Jetpack Compose)
+- **UI Framework**: Jetpack Compose with Material Design 3
+- **State**: Compose state management (remember, mutableStateOf)
+- **Persistence**: SharedPreferences for settings, Room for data
+- **Icons**: Material Icons (https://fonts.google.com/icons)
+- **Fonts**: Roboto (Material Design default)
+- **Reference**: `/guidelines/DesignSystem.md` for exact Kotlin values
 
 ---
 
 ## Final Notes
 
-- **Consistency is key**: Always reference these guidelines and `DesignSystem.md`
-- **User first**: If guidelines conflict with UX, prioritize user experience
-- **Performance matters**: Fast animations > complex animations
-- **Accessibility required**: Not optional - build it in from the start
-- **Test on real devices**: Emulators/browsers don't show everything
+- **Consistency is paramount**: Always reference these guidelines and `DesignSystem.md`
+- **Material You first**: Design follows Material Design 3 specifications exactly
+- **Typography**: Use CSS classes (.headline-large, .body-medium, etc.) - never Tailwind text utilities
+- **Gradients**: Use exact 135deg diagonal gradients from the gradient system
+- **Elevation**: Use .elevation-X classes for consistent shadows
+- **Accessibility**: Not optional - 48px touch targets, 4.5:1 contrast minimum
+- **Performance**: 60fps animations, debounced inputs, memoized computations
+- **Test on real devices**: Emulators don't show everything
 
 ---
 
-**For Kotlin/Jetpack Compose specific implementation details, see `/guidelines/DesignSystem.md`**
+**For complete Kotlin/Jetpack Compose implementation details with exact dp/sp values, color codes, and Compose-specific patterns, see `/guidelines/DesignSystem.md`**
